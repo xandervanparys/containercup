@@ -2,18 +2,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createClient } from "@/utils/supabase/client";
+import supabaseBrowserClient from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
-
-
+import { FcGoogle } from 'react-icons/fc';
 
 export const description =
 "A login page with two columns. The first column has the login form with email and password. There's a Forgot your passwork link and a link to sign up if you do not have an account. The second column has a cover image."
 
 export default function LoginPage() {
   const handleLoginWithOauth = () => {
-    const supabase = createClient();
+    const supabase = supabaseBrowserClient;
   
     supabase.auth.signInWithOAuth({
       provider: "google",
@@ -23,7 +22,7 @@ export default function LoginPage() {
     });
   };
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <div className="w-full h-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -57,8 +56,9 @@ export default function LoginPage() {
             <Button type="submit" className="w-full">
               Login
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => handleLoginWithOauth()}>
+            <Button variant="outline" className="w-full gap-2" onClick={() => handleLoginWithOauth()}>
               Login with Google
+              <FcGoogle />
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">

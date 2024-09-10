@@ -88,7 +88,9 @@ export function Dashboard() {
 
   const addRandomCup = () => {
     if (userId){
-      createContainerCup(userId, "goat", "Ez dub vr xander", "joe.jpeg");
+      let number: number = Math.random();
+      let name = ((Number(number.toFixed(2)) * 100) % 26) + 'a';
+      createContainerCup(userId, name, "Ez dub vr xander", "joe.jpeg");
     }
   }
 

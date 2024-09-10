@@ -13,7 +13,10 @@ class DatabaseService {
             image_url: imageUrl ?? ''
         }]);
 
-        if (error) throw error;
+        if (error) {
+            console.log(error);
+            throw error;
+        };
         return data as ContainerCup | null;
     }
 

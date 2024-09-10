@@ -86,14 +86,6 @@ export function Dashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const userId = useUser()?.id || "";
 
-  const addRandomCup = () => {
-    if (userId){
-      let number: number = Math.random();
-      let name = ((Number(number.toFixed(2)) * 100) % 26) + 'a';
-      createContainerCup(userId, name, "Ez dub vr xander", "joe.jpeg");
-    }
-  }
-
   useEffect(() => {
     if (userId) {
       getContainerCups(userId)
@@ -385,7 +377,7 @@ export function Dashboard() {
                     <File className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only">Export</span>
                   </Button>
-                  <Button onClick={() => addRandomCup()}
+                  <Button
                     size="sm"
                     variant="outline"
                     className="h-7 gap-1 text-sm"

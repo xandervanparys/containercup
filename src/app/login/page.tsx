@@ -5,10 +5,6 @@ import { Label } from "@/components/ui/label";
 import supabaseBrowserClient from "@/utils/supabase/client";
 import Link from "next/link";
 import { FcGoogle } from 'react-icons/fc';
-
-export const description =
-"A login page with two columns. The first column has the login form with email and password. There's a Forgot your passwork link and a link to sign up if you do not have an account. The second column has a cover image."
-
 export default function LoginPage() {
   const handleLoginWithOauth = () => {
     const supabase = supabaseBrowserClient;

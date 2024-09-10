@@ -17,7 +17,7 @@ export default function LoginPage() {
     supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin + "/auth/callback?next=/dashboard",
+        redirectTo: window.location.origin + "/auth/callback?next=/",
       },
     });
   };
@@ -70,13 +70,13 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="hidden bg-muted lg:block">
-        <Image
-          src="/placeholder.svg"
+        {/* <Image
+          src="/img/truck.jpg"
           alt="Image"
           width="1920"
           height="1080"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+        /> */}
       </div>
     </div>
   )

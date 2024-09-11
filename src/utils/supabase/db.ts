@@ -1,4 +1,4 @@
-import supabaseBrowserClient from "./client";
+import supabaseBrowserClient from "./client/client";
 import ContainerCup from "@/types/containercup";
 
 const db = supabaseBrowserClient;
@@ -63,3 +63,5 @@ export const deleteContainerCup = async (id: number): Promise<ContainerCup | nul
   if (error) throw error;
   return data as ContainerCup | null;
 };
+
+

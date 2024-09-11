@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import supabaseBrowserClient from "@/utils/supabase/client";
+import supabaseBrowserClient from "@/utils/supabase/client/client";
 import Link from "next/link";
 import { FcGoogle } from 'react-icons/fc';
 export default function LoginPage() {

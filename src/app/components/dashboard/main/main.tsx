@@ -51,6 +51,36 @@ import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import CreateNew from "./components/create-new";
 import Stats from "./components/stats/main-stats";
+import { getPublicUrl, getSignedUrl, uploadImage } from "@/utils/supabase/storage/storage";
+import { ImageUpload } from "./components/image-upload/image-upload";
+
+const ImageUploader = () => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      try {
+        const path = `images/${file.name}`;
+        const bucket = "containercup-pictures";
+        await uploadImage(file, path, bucket);
+        const url = await getSignedUrl(path, bucket);
+        console.log('Image uploaded:', url);
+        setImageUrl(url);
+      } catch (error) {
+        console.error('Error uploading or retrieving image:', error);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <input type="file" onChange={handleFileChange} />
+      {imageUrl && <img src={imageUrl} alt="Uploaded Image" />}
+    </div>
+  );
+};
+
 
 export default function Main() {
   const [cups, setCups] = useState<ContainerCup[]>([]);
@@ -152,6 +182,8 @@ export default function Main() {
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
           <CreateNew />
           <Stats />
+          <ImageUploader />
+          <ImageUpload />
         </div>
         <Tabs defaultValue="week">
           <div className="flex items-center">

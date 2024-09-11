@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import supabaseBrowserClient from '@/utils/supabase/client';
+import supabaseBrowserClient from '@/utils/supabase/client/client';
 import { User } from '@supabase/supabase-js';
 
 const fetchSession = async (): Promise<User | null> => {

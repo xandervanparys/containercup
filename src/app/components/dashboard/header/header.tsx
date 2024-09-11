@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Home, LineChart, Package, Package2, PanelLeft, Search, ShoppingCart, Users2 } from "lucide-react";
+import { Home, LineChart, Package, Package2, PanelLeft, Search, ShoppingCart, User, Users2 } from "lucide-react";
 import Link from "next/link";
 
 
@@ -119,6 +119,7 @@ export default function Header() {
                       alt="Avatar"
                       className="overflow-hidden rounded-full"
                     /> */}
+            <User />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

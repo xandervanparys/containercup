@@ -27,6 +27,7 @@ export default function Main() {
   const [loading, setLoading] = useState<boolean>(true);
   const userId = useUser()?.id || "";
   const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [selectedCup, setSelectedCup] = useState<ContainerCup | null>(null);
 
   const handleSave = (containerCup: ContainerCup) => {
     createContainerCup(containerCup);
@@ -40,7 +41,6 @@ export default function Main() {
         .finally(() => setLoading(false));
     }
   }, [userId, loading]);
-
 
   if (loading)
     return (
@@ -123,20 +123,20 @@ export default function Main() {
     );
 
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-      <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+    <main className="h-full grid gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+      <div className="h-full grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+        <div className="h-full grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
           <CreateNew setIsPopupOpen={setIsPopupOpen} />
           <Stats />
         </div>
-        <ContainerCupList setIsPopupOpen={setIsPopupOpen} containercups={containerCups} />
+        <ContainerCupList setSelectedCup={setSelectedCup} setIsPopupOpen={setIsPopupOpen} containercups={containerCups} />
       </div>
       <ContainerCupPopup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
         onSave={handleSave}
       />
-      <ContainerCupDetail />
+      <ContainerCupDetail selectedCup={selectedCup} />
     </main>
   );
 }

@@ -4,6 +4,8 @@ export interface IContainerCup {
     name: string;
     description: string;
     image_url: string;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export default class ContainerCup implements IContainerCup {
@@ -12,6 +14,8 @@ export default class ContainerCup implements IContainerCup {
     name: string;
     description: string;
     image_url: string;
+    created_at?: string | undefined;
+    updated_at?: string | undefined
 
     constructor({ id, user_id, name, description, image_url }: IContainerCup) {
         this.id = id;

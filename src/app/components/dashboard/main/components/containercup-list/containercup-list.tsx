@@ -33,7 +33,7 @@ import Image from "next/image";
 import { getSignedUrl } from "@/utils/supabase/storage/storage";
 
 
-export default function ContainerCupList({ containercups, setIsPopupOpen }: containercupsProps) {
+export default function ContainerCupList({ containercups, setIsPopupOpen, setSelectedCup }: containercupsProps) {
     const [cups, setCups] = useState<ContainerCup[]>([]);
     const [urls, setUrls] = useState<string[]>([]);
     const openPopup = () => {
@@ -105,7 +105,7 @@ export default function ContainerCupList({ containercups, setIsPopupOpen }: cont
                         </TableHeader>
                         <TableBody>
                             {cups.map((cup: ContainerCup, index: number) => (
-                                <TableRow className="bg-accent" key={cup.id}>
+                                <TableRow onClick={() => setSelectedCup(cup)} className="bg-accent" key={cup.id}>
                                     <TableCell>
                                         <div className="font-medium">{cup.name}</div>
                                     </TableCell>

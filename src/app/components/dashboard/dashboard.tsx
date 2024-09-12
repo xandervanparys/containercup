@@ -13,9 +13,9 @@ export function Dashboard() {
   
     return (
       <TooltipProvider>
-        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+        <div className="flex min-h-screen w-full h-full flex-col bg-muted/40">
           <Navigation />
-          <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+          <div className="flex flex-col h-full sm:gap-4 sm:py-4 sm:pl-14">
             <Header />
             <Main />
           </div>

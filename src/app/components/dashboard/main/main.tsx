@@ -29,7 +29,6 @@ export default function Main() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const handleSave = (containerCup: ContainerCup) => {
-    console.log("before post: " + JSON.stringify(containerCup));
     createContainerCup(containerCup);
     setLoading(true);
   }

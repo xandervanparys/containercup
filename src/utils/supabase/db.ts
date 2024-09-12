@@ -14,7 +14,6 @@ export const createContainerCup = async (
   }]);
 
   if (error) {
-    console.log(error);
     throw error;
   }
   

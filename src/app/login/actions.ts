@@ -8,8 +8,6 @@ import { createClient } from '@/utils/supabase/server/server'
 export async function login(formData: FormData) {
   const supabase = createClient()
 
-  console.log("login");
-
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,

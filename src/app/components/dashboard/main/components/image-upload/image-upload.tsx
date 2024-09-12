@@ -48,7 +48,6 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
             const bucket = "containercup-pictures";
             await uploadImage(file, path, bucket);
             const url = await getSignedUrl(path, bucket);
-            console.log('Image uploaded:', url);
             setUploadStatus('success');
             onChange(url);
         } catch (error) {

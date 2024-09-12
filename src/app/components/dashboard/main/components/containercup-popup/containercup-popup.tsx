@@ -39,15 +39,12 @@ export default function ContainerCupPopup({ isOpen, onClose, onSave, initialData
   }
 
   const handleImageChange = (newUrl: string) => {
-    console.log("image url: " + newUrl);
     setContainerCup(prev => ({...prev, ['image_url']: newUrl}));
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("user_id: " + user?.id);
     containerCup.user_id = user?.id;
-    console.log("cup: " + containerCup.user_id);
     onSave(containerCup)
     onClose()
   }

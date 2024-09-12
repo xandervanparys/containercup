@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import ContainerCup from "@/types/containercup";
 import { ImageUpload } from "../image-upload/image-upload";
-import { getSignedUrl, uploadImage } from "@/utils/supabase/storage/storage";
+import { uploadImage } from "@/utils/supabase/storage/storage";
 import { useUser } from "@/hooks/useUser";
 
 interface ContainerCupPopupProps {
@@ -30,7 +30,7 @@ export default function ContainerCupPopup({
     image_url: "",
   });
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Store the selected file
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const user = useUser();
 
@@ -48,7 +48,7 @@ export default function ContainerCupPopup({
   };
 
   const handleFileSelect = (file: File | null) => {
-    setSelectedFile(file); // Store the selected file
+    setSelectedFile(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,7 +67,6 @@ export default function ContainerCupPopup({
         const path = `images/${selectedFile.name}`;
         const bucket = "containercup-pictures";
         await uploadImage(selectedFile, path, bucket);
-        // imageUrl = await getSignedUrl(path, bucket);
         imageUrl = path;
         setIsUploading(false);
       } catch (error) {

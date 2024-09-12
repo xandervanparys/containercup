@@ -31,22 +31,20 @@ import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { getSignedUrl } from "@/utils/supabase/storage/storage";
-import { useUser } from "@/hooks/useUser";
 
 
 export default function ContainerCupList({ containercups, setIsPopupOpen }: containercupsProps) {
     const [cups, setCups] = useState<ContainerCup[]>([]);
     const [urls, setUrls] = useState<string[]>([]);
-    const user = useUser();
     const openPopup = () => {
         setIsPopupOpen(true);
     }
 
     useEffect(() => {
         setCups(containercups);
-        cups.forEach(async (cup) => {
+        containercups.forEach(async (cup) => {
             const url = await getSignedUrl(cup.image_url, 'containercup-pictures');
-            setUrls([...urls, url]);
+            setUrls(urls => [...urls, url]);
         });
     }, [containercups]);
 

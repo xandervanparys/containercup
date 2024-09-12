@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -18,7 +17,7 @@ type ImageUploadProps = {
   onFileSelect: (file: File | null) => void; 
 };
 
-export function ImageUpload({ value, onFileSelect }: ImageUploadProps) {
+export function ImageUpload({ onFileSelect }: ImageUploadProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,3 @@
-import { StatsComponentProps } from "@/types/props/statProps";
 import StatsComponent from "./stats-component";
 
 

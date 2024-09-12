@@ -14,6 +14,7 @@ const getFilePath = async (path: string): Promise<string> => {
 
 export const uploadImage = async (file: File, path: string, bucket: 'profile-picures' | 'containercup-pictures') => {
   const filePath = await getFilePath(path);
+  console.log('Uploading image to:', filePath);
   const { data, error } = await db.storage
     .from(bucket)
     .upload(filePath, file);

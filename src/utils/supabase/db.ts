@@ -16,7 +16,7 @@ export const createContainerCup = async (
   if (error) {
     throw error;
   }
-  
+
   return data as ContainerCup | null;
 };
 
@@ -40,7 +40,7 @@ export const getContainerCup = async (id: number): Promise<ContainerCup | null> 
 };
 
 export const updateContainerCup = async (
-  id: number, 
+  id: number,
   updates: Partial<{ name: string; description?: string; image_url?: string }>
 ): Promise<ContainerCup | null> => {
   const { data, error } = await db.from('container_cups')

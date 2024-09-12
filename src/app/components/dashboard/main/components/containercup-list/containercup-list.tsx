@@ -29,18 +29,27 @@ import { containercupsProps } from "@/types/props/containercupsProps";
 import ContainerCup from "@/types/containercup";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import Image from "next/image";
+import { getSignedUrl } from "@/utils/supabase/storage/storage";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useUser } from "@/hooks/useUser";
 
 
-export default function ContainerCupList(props: containercupsProps) {
+export default function ContainerCupList({ containercups, setIsPopupOpen }: containercupsProps) {
     const [cups, setCups] = useState<ContainerCup[]>([]);
-
+    const [urls, setUrls] = useState<string[]>([]);
+    const user = useUser();
     const openPopup = () => {
-        props.setIsPopupOpen(true);
+        setIsPopupOpen(true);
     }
 
     useEffect(() => {
-        setCups(props.containercups);
-    }, [props.containercups]);
+        setCups(containercups);
+        cups.forEach(async (cup) => {
+            const url = await getSignedUrl(cup.image_url, 'containercup-pictures');
+            setUrls([...urls, url]);
+        });
+    }, [containercups]);
 
     return (
         <div>
@@ -98,7 +107,7 @@ export default function ContainerCupList(props: containercupsProps) {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {cups.map((cup: ContainerCup) => (
+                            {cups.map((cup: ContainerCup, index: number) => (
                                 <TableRow className="bg-accent" key={cup.id}>
                                     <TableCell>
                                         <div className="font-medium">{cup.name}</div>
@@ -113,15 +122,17 @@ export default function ContainerCupList(props: containercupsProps) {
                                     </TableCell>
                                     <TableCell className="hidden md:table-cell">
                                         {
-                                            cup.image_url.length > 40 ? <Tooltip>
+                                            <Tooltip>
                                                 <TooltipTrigger>
                                                     {cup.image_url.slice(0, 40) + '...'}
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    {cup.image_url}
+                                                    {urls[index] &&
+                                                        <Image src={urls[index]} alt={cup.name} width={100} height={100}
+                                                            objectFit="cover" />
+                                                    }
                                                 </TooltipContent>
                                             </Tooltip>
-                                                : cup.image_url
                                         }
                                     </TableCell>
                                     <TableCell className="text-right">$250.00</TableCell>

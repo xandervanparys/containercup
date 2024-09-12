@@ -31,13 +31,11 @@ import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { getSignedUrl } from "@/utils/supabase/storage/storage";
-import { useUser } from "@/hooks/useUser";
 
 
 export default function ContainerCupList({ containercups, setIsPopupOpen }: containercupsProps) {
     const [cups, setCups] = useState<ContainerCup[]>([]);
     const [urls, setUrls] = useState<string[]>([]);
-    const user = useUser();
     const openPopup = () => {
         setIsPopupOpen(true);
     }

@@ -13,15 +13,14 @@ import {
 import { Tabs } from "@/components/ui/tabs";
 import { useUser } from "@/hooks/useUser";
 import ContainerCup from "@/types/containercup";
-import { createContainerCup, getContainerCups } from "@/utils/containerCupAPI";
 import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import CreateNew from "./components/create-new/create-new";
 import Stats from "./components/stats/main-stats";
-import { ImageUpload } from "./components/image-upload/image-upload";
 import ContainerCupList from "./components/containercup-list/containercup-list";
 import ContainerCupDetail from "./components/containercup-detail/containercup-detail";
 import ContainerCupPopup from "./components/containercup-popup/containercup-popup";
+import { createContainerCup, getContainerCupsFromUser } from "@/utils/supabase/db";
 
 export default function Main() {
   const [containerCups, setContainerCups] = useState<ContainerCup[]>([])
@@ -31,13 +30,13 @@ export default function Main() {
 
   const handleSave = (containerCup: ContainerCup) => {
     console.log("before post: " + JSON.stringify(containerCup));
-    createContainerCup(containerCup).then(cup => console.log("cup returned: " + cup));
+    createContainerCup(containerCup);
     setLoading(true);
   }
 
   useEffect(() => {
     if (userId) {
-      getContainerCups(userId)
+      getContainerCupsFromUser(userId)
         .then((cups) => setContainerCups(cups))
         .finally(() => setLoading(false));
     }

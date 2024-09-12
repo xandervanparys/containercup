@@ -4,16 +4,13 @@ import ContainerCup from "@/types/containercup";
 const db = supabaseBrowserClient;
 
 export const createContainerCup = async (
-  userId: string, 
-  name: string, 
-  description?: string, 
-  imageUrl?: string
+  cup: ContainerCup
 ): Promise<ContainerCup | null> => {
   const { data, error } = await db.from('container_cups').insert([{
-    user_id: userId,
-    name: name,
-    description: description ?? '',
-    image_url: imageUrl ?? ''
+    user_id: cup.user_id,
+    name: cup.name,
+    description: cup.description ?? '',
+    image_url: cup.image_url ?? ''
   }]);
 
   if (error) {

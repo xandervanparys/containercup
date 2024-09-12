@@ -14,13 +14,11 @@ export const getContainerCups = async (userId: string): Promise<ContainerCup[]> 
 };
 
 export const createContainerCup = async (
-    userId: string, 
-    name: string, 
-    description?: string, 
-    imageUrl?: string
+    cup: ContainerCup
 ): Promise<ContainerCup> => {
     try {
-        const response = await axios.post(API_URL, { userId, name, description, imageUrl });
+        console.log("before post: " + JSON.stringify(cup));
+        const response = await axios.post(API_URL, cup);
         return response.data as ContainerCup;
     } catch (error) {
         console.error('Error creating container cup:', error);

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {getContainerCupsFromUser, createContainerCup, updateContainerCup, deleteContainerCup} from '@/utils/supabase/db';
+import ContainerCup from '@/types/containercup';
 
 export async function GET(req: NextRequest) {
     const userId = req.nextUrl.searchParams.get('userId') || '';
@@ -13,10 +14,10 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { userId, name, description, imageUrl } = await req.json();
+    const cup: ContainerCup = await req.json();
 
     try {
-        const data = await createContainerCup(userId, name, description, imageUrl);
+        const data = await createContainerCup(cup);
         return NextResponse.json(data, { status: 201 });
     } catch (error) {
         return NextResponse.json({ error: 'Failed to create container cup' }, { status: 500 });

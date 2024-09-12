@@ -11,18 +11,21 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Input, InputProps } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { CheckCircle2, XCircle, Upload } from "lucide-react"
 import { getSignedUrl, uploadImage } from "@/utils/supabase/storage/storage"
 
-export function ImageUpload() {
+type ImageUploadProps = {
+    value: string;
+    onChange: (newUrl: string) => void;
+};
+
+export function ImageUpload({ value, onChange }: ImageUploadProps) {
     const [file, setFile] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle')
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0]
         if (selectedFile) {
@@ -46,8 +49,8 @@ export function ImageUpload() {
             await uploadImage(file, path, bucket);
             const url = await getSignedUrl(path, bucket);
             console.log('Image uploaded:', url);
-            setImageUrl(url);
             setUploadStatus('success');
+            onChange(url);
         } catch (error) {
             setUploadStatus('error');
             console.error('Error uploading or retrieving image:', error);

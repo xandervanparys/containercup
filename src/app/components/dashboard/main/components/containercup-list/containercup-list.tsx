@@ -31,7 +31,6 @@ import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { getSignedUrl } from "@/utils/supabase/storage/storage";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useUser } from "@/hooks/useUser";
 
 

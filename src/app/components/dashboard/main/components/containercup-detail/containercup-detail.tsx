@@ -51,6 +51,7 @@ export default function ContainerCupDetail({ selectedCup }: cupDetailProps) {
     const user = useUser();
 
     useEffect(() => {
+        setSignedUrl(null);
         if (selectedCup?.image_url) {
             getSignedUrl(selectedCup.image_url, "containercup-pictures")
                 .then((url) => setSignedUrl(url));

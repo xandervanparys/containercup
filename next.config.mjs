@@ -5,7 +5,12 @@ const nextConfig = {
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   },
   images: {
-    domains: ['xvdyxxqazcasyndwkgxy.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'xvdyxxqazcasyndwkgxy.supabase.co',
+      },
+    ],
   },
 };
 
